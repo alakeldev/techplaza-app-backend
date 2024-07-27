@@ -22,3 +22,18 @@ class UserManager(BaseUserManager):
         user.set_password(password)
         user.save(using=self._db)
         return user
+    
+    def create_superuser(self, email, full_name, password, **kwrgs):
+        kwrgs.setdefault("is_member", True)
+        kwrgs.setdefault("is_superuser", True)
+        kwrgs.setdefault("is_verfied", True)
+
+        if kwrgs.get("is_member") is not True:
+            raise ValueError(_("the (is member) is true for admin users"))
+        
+        if kwrgs.get("is_superuser") is not True:
+            raise ValueError(_("the (is superuser) is true for admin users"))
+        
+        user=self.create_user(email, full_name, password, **kwrgs)
+        user.save(using=self._db)
+        return user
