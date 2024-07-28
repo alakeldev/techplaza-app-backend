@@ -31,8 +31,8 @@ class RegisterView(GenericAPIView):
 
             return Response({
                 'data':user,
-                'message':f'Thanks for your Registration 
-                {user.full_name}, a verified code has been sent to your Email.'
+                'message': f'''Thanks for your Registration {user["full_name"]},
+                            a verified code has been sent to your Email.'''
             }, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, 
                     status=status.HTTP_400_BAD_REQUEST)
