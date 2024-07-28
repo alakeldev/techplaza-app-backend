@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from .serializers import RegisterSerializer
 from django.core.mail import send_mail
+from django.utils import timezone
 import random
 import string
 
@@ -20,6 +21,9 @@ class RegisterView(GenericAPIView):
             user=serializer.data
 
             otp = ''.join(random.choices(string.ascii_uppercase + string.digits, k=6))
+            user.otp = otp
+            user.otp_created_at = timezone.now()
+            user.save()
 
             send_mail(
                 'OTP for Registration Verification',
