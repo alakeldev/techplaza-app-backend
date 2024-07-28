@@ -35,7 +35,7 @@ class UserManager(BaseUserManager):
         if kwrgs.get("is_superuser") is not True:
             raise ValueError(_("the (is superuser) is true for admin users"))
         
-        if kwrgs.get("is_superuser") is not True:
+        if kwrgs.get("is_staff") is not True:
             raise ValueError(_("the (is staff) is true for admin users"))
         
         user=self.create_user(email, full_name, password, **kwrgs)
