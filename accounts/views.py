@@ -2,11 +2,13 @@ from django.shortcuts import render
 from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import RegisterSerializer
 from django.core.mail import send_mail
 from django.utils import timezone
+from datetime import timedelta
 import random
 import string
+from .serializers import RegisterSerializer
+from .models import User
 
 # Create your views here.
 
@@ -40,3 +42,29 @@ class RegisterView(GenericAPIView):
             }, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, 
                     status=status.HTTP_400_BAD_REQUEST)
+    
+
+class VerifyEmail(GenericAPIView):
+    def post(self, request):
+        otp_to_verify = request.data.get('otp')
+        email = request.data.get('email')
+        try:
+            user = User.objects.get(email=email)
+            otp_valid_duration = 15  
+
+            if user.otp == otp_to_verify and timezone.now() - user.otp_created_at <= timedelta(minutes=otp_valid_duration):
+                user.is_verified = True
+                user.save()
+                return Response({
+                    'message': 'Email successfully verified'
+                }, status=status.HTTP_200_OK)
+
+            else:
+                return Response({
+                    'error': 'Invalid or expired OTP.'
+                }, status=status.HTTP_400_BAD_REQUEST)
+
+        except User.DoesNotExist:
+            return Response({
+                'error': 'User does not exist / OTP not provided'
+            }, status=status.HTTP_400_BAD_REQUEST)
