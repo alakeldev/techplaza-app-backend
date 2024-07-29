@@ -25,3 +25,21 @@ class RegisterSerializer(serializers.ModelSerializer):
             password=validated_data.get('password1'),
         )
         return user
+
+
+class LoginSerializer(serializers.ModelSerializer):
+    email=serializers.EmailField(max_length=255, min_length=10)
+    password=serializers.CharField(max_length=40, min_length=4, write_only=True)
+    full_name=serializers.CharField(max_length=100, read_only=True)
+    token=serializers.CharField(max_length=255, read_only=True)
+    refresh_token=serializers.CharField(max_length=255, read_only=True)
+
+    class Meta:
+        model=User
+        fields=['email', 'password', 'full_name', 'token', 'refresh_token']
+
+    def validate(self, attrs):
+        email = attrs.get('email')
+        password = attrs.get('password')
+
+        return super().validate(attrs)
