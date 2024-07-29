@@ -8,7 +8,7 @@ from django.utils import timezone
 from datetime import timedelta
 import random
 import string
-from .serializers import RegisterSerializer
+from .serializers import RegisterSerializer, LoginSerializer
 from .models import User
 
 # Create your views here.
@@ -70,3 +70,11 @@ class VerifyEmail(APIView):
             return Response({
                 'error': 'User does not exist / OTP not provided'
             }, status=status.HTTP_400_BAD_REQUEST)
+
+
+class LoginView(GenericAPIView):
+    serializer_class = LoginSerializer
+    def post(self, request):
+        serializer = self.serializer_class(data=request.data, context={'request': request})
+        serializer.is_valid(raise_exception=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
