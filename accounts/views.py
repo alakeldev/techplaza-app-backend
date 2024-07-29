@@ -2,6 +2,7 @@ from django.shortcuts import render
 from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.views import APIView
 from django.core.mail import send_mail
 from django.utils import timezone
 from datetime import timedelta
@@ -19,8 +20,7 @@ class RegisterView(GenericAPIView):
         user_data = request.data
         serializer=self.serializer_class(data=user_data)
         if serializer.is_valid(raise_exception=True):
-            serializer.save()
-            user=serializer.data
+            user = serializer.save()
 
             otp = ''.join(random.choices(string.ascii_uppercase + string.digits, k=6))
             user.otp = otp
@@ -31,20 +31,22 @@ class RegisterView(GenericAPIView):
                 'OTP for Registration Verification',
                 f'Your OTP for registration verification is {otp}.',
                 'techplaza1@hotmail.com',
-                [user['email']],
+                [user.email],
                 fail_silently=False,
             )
 
+            user_data = RegisterSerializer(user).data
+
             return Response({
-                'data':user,
-                'message': f'''Thanks for your Registration {user["full_name"]},
+                'data':user_data,
+                'message': f'''Thanks for your Registration {user.full_name},
                             a verified code has been sent to your Email.'''
             }, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, 
                     status=status.HTTP_400_BAD_REQUEST)
     
 
-class VerifyEmail(GenericAPIView):
+class VerifyEmail(APIView):
     def post(self, request):
         otp_to_verify = request.data.get('otp')
         email = request.data.get('email')
