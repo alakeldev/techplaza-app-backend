@@ -1,4 +1,6 @@
 from rest_framework import serializers
+from django.contrib.auth import authenticate
+from rest_framework.exceptions import AuthenticationFailed
 from .models import User
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -41,5 +43,12 @@ class LoginSerializer(serializers.ModelSerializer):
     def validate(self, attrs):
         email = attrs.get('email')
         password = attrs.get('password')
-
-        return super().validate(attrs)
+        request = self.context.get('request')
+        user = authenticate(request, email=email, password=password)
+        if not user:
+            raise AuthenticationFailed("Sorry the cerdentials are invalid")
+        else:
+            return {
+                'full_name': user.user_full_name,
+                'email': user.email,
+            }
