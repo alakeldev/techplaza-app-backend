@@ -86,7 +86,6 @@ class PasswordResetSerializer(serializers.Serializer):
                 'email_text' : f"Hello, please use the link below to reset the password \n {absolute_link}",
                 'to': user.email
             }
-            send_email(data)
 
             def send_email(data):
                 email = EmailMessage(
@@ -97,6 +96,7 @@ class PasswordResetSerializer(serializers.Serializer):
                 )
                 email.send()
             
+            send_email(data)
         return super().validate(attrs)
 
 
