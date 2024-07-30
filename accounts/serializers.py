@@ -1,6 +1,13 @@
 from rest_framework import serializers
 from django.contrib.auth import authenticate
+from django.contrib.sites.shortcuts import get_current_site
 from rest_framework.exceptions import AuthenticationFailed
+from django.contrib.auth.tokens import PasswordResetTokenGenerator
+from django.utils.http import urlsafe_base64_encode
+from django.utils.encoding import smart_str, smart_bytes
+from django.urls import reverse
+from django.core.mail import EmailMessage
+from django.conf import settings
 from .models import User
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -56,3 +63,38 @@ class LoginSerializer(serializers.ModelSerializer):
                 'token':str(user_token.get('token')),
                 'refresh_token': str(user_token.get('refresh')),
             }
+
+class PasswordResetSerializer(serializers.Serializer):
+    email = serializers.EmailField(max_length=255)
+
+    class Meta:
+        fields = ['email']
+
+    def validate(self, attrs):
+
+        email = attrs.get('email')
+        if User.objects.filter(email=email).exists():
+            user = User.objects.get(email=email)
+            uidb64 = urlsafe_base64_encode(smart_bytes(user.id))
+            token = PasswordResetTokenGenerator().make_token(user)
+            request=self.context.get('request')
+            site_domain = get_current_site(request).domain
+            relative_link = reverse('confirm-password-reset', kwargs={'uidb64': uidb64, 'token' : token})
+            absolute_link = f"http://{site_domain}{relative_link}"
+            data = {
+                'email_subject' : "Link to reset your password",
+                'email_text' : f"Hello, please use the link below to reset the password \n {absolute_link}",
+                'to': user.email
+            }
+            send_email(data)
+
+            def send_email(data):
+                email = EmailMessage(
+                subject = data['email_subject'],
+                body = data['email_text'],
+                from_email = settings.EMAIL_HOST_USER,
+                to = [data['to']]
+                )
+                email.send()
+            
+        return super().validate(attrs)
