@@ -8,7 +8,7 @@ from django.utils import timezone
 from datetime import timedelta
 import random
 import string
-from .serializers import RegisterSerializer, LoginSerializer
+from .serializers import RegisterSerializer, LoginSerializer, PasswordResetSerializer
 from .models import User
 
 # Create your views here.
@@ -78,3 +78,11 @@ class LoginView(GenericAPIView):
         serializer = self.serializer_class(data=request.data, context={'request': request})
         serializer.is_valid(raise_exception=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class PasswordResetView(GenericAPIView):
+    serializer_class = PasswordResetSerializer
+    def post(self, request):
+        serializer = self.serializer_class(data=request.data, context={'request': request})
+        serializer.is_valid(raise_exception=True)
+        return Response({'message':'A reset link sent to your email, check the spam email please'}, status=status.HTTP_200_OK)
