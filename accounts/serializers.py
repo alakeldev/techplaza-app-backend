@@ -3,8 +3,8 @@ from django.contrib.auth import authenticate
 from django.contrib.sites.shortcuts import get_current_site
 from rest_framework.exceptions import AuthenticationFailed
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
-from django.utils.http import urlsafe_base64_encode
-from django.utils.encoding import smart_str, smart_bytes
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import smart_str, smart_bytes, force_str
 from django.urls import reverse
 from django.core.mail import EmailMessage
 from django.conf import settings
@@ -98,3 +98,36 @@ class PasswordResetSerializer(serializers.Serializer):
                 email.send()
             
         return super().validate(attrs)
+
+
+class NewPasswordSerializer(serializers.Serializer):
+    password = serializers.CharField(max_length=40, min_length=4, write_only=True)
+    password_confirm = serializers.CharField(max_length=40, min_length=4, write_only=True)
+    uidb64 = serializers.CharField(write_only=True)
+    token = serializers.CharField(write_only=True)
+
+    class Meta:
+        fields = ["password", "password_confirm", "uidb64", "token"]
+
+    def validate(self, attrs):
+
+        try:
+            token = attrs.get('token')
+            uidb64 = attrs.get('uidb64')
+            password = attrs.get('password')
+            password_confirm = attrs.get('password_confirm')
+
+            user_id = force_str(urlsafe_base64_decode(uidb64))
+            user = User.objects.get(id=user_id)
+            if not PasswordResetTokenGenerator().check_token(user, token):
+                raise AuthenticationFailed("The link is invalid", 401)
+
+            if password != password_confirm:
+                raise AuthenticationFailed("Password Fields didn't match!")
+            
+            user.set_password(password)
+            user.save()
+            return user
+        
+        except:
+            return AuthenticationFailed("The link is invalid/expired")
