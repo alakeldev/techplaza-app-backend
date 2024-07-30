@@ -5,6 +5,9 @@ from rest_framework import status
 from rest_framework.views import APIView
 from django.core.mail import send_mail
 from django.utils import timezone
+from django.utils.http import urlsafe_base64_decode
+from django.utils.encoding import smart_str, DjangoUnicodeDecodeError
+from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from datetime import timedelta
 import random
 import string
@@ -86,3 +89,16 @@ class PasswordResetView(GenericAPIView):
         serializer = self.serializer_class(data=request.data, context={'request': request})
         serializer.is_valid(raise_exception=True)
         return Response({'message':'A reset link sent to your email, check the spam email please'}, status=status.HTTP_200_OK)
+    
+
+class ConfirmPasswordResetView(GenericAPIView):
+    def get(self,request, uidb64, token):
+        try:
+            user_id = smart_str(urlsafe_base64_decode(uidb64))
+            user = User.objects.get(id=user_id)
+            if not PasswordResetTokenGenerator().check_token(user, token):
+                return Response({'message': 'Token is expired'}, status=status.HTTP_401_UNAUTHORIZED)
+            return Response({'success': True, 'message': 'The credentials are valid', 'uidb64': uidb64, 'token': token}, status=status.HTTP_200_OK)
+
+        except DjangoUnicodeDecodeError:
+            return Response({'message': 'token has expired'}, status=status.HTTP_401_UNAUTHORIZED)
