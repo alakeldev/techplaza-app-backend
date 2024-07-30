@@ -11,7 +11,7 @@ from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from datetime import timedelta
 import random
 import string
-from .serializers import RegisterSerializer, LoginSerializer, PasswordResetSerializer
+from .serializers import RegisterSerializer, LoginSerializer, PasswordResetSerializer, NewPasswordSerializer
 from .models import User
 
 # Create your views here.
@@ -102,3 +102,12 @@ class ConfirmPasswordResetView(GenericAPIView):
 
         except DjangoUnicodeDecodeError:
             return Response({'message': 'token has expired'}, status=status.HTTP_401_UNAUTHORIZED)
+        
+
+class NewPasswordView(GenericAPIView):
+    serializer_class = NewPasswordSerializer
+
+    def patch(self, request):
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        return Response({'message' : 'Your Password Reset Successfully'}, status=status.HTTP_200_OK)
