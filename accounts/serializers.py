@@ -8,6 +8,7 @@ from django.utils.encoding import smart_str, smart_bytes, force_str
 from django.urls import reverse
 from django.core.mail import EmailMessage
 from django.conf import settings
+from rest_framework_simplejwt.tokens import RefreshToken, TokenError
 from .models import User
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -131,3 +132,22 @@ class NewPasswordSerializer(serializers.Serializer):
         
         except:
             return AuthenticationFailed("The link is invalid/expired")
+        
+
+class LogoutSerializer(serializers.Serializer):
+    refersh_token = serializers.CharField()
+    
+    default_error_messages = {
+        'bad_token':('Token expired')
+    }
+    
+    def validate(self, attrs):
+        self.token = attrs.get('refresh_token')
+        return attrs
+    
+    def save(self, **kwargs):
+        try:
+            token = RefreshToken(self.token)
+            token.blacklist()
+        except TokenError:
+            return self.fail('bad_token')
