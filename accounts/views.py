@@ -3,6 +3,7 @@ from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
 from django.core.mail import send_mail
 from django.utils import timezone
 from django.utils.http import urlsafe_base64_decode
@@ -11,7 +12,7 @@ from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from datetime import timedelta
 import random
 import string
-from .serializers import RegisterSerializer, LoginSerializer, PasswordResetSerializer, NewPasswordSerializer
+from .serializers import RegisterSerializer, LoginSerializer, PasswordResetSerializer, NewPasswordSerializer, LogoutSerializer
 from .models import User
 
 # Create your views here.
@@ -111,3 +112,13 @@ class NewPasswordView(GenericAPIView):
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
         return Response({'message' : 'Your Password Reset Successfully'}, status=status.HTTP_200_OK)
+    
+class LogoutView(GenericAPIView):
+    serializer_class = LogoutSerializer
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(status=status.HTTP_204_NO_CONTENT)
