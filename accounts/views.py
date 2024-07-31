@@ -14,6 +14,7 @@ import random
 import string
 from .serializers import RegisterSerializer, LoginSerializer, PasswordResetSerializer, NewPasswordSerializer, LogoutSerializer
 from .models import User
+import logging
 
 # Create your views here.
 
@@ -48,31 +49,35 @@ class RegisterView(GenericAPIView):
             }, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, 
                     status=status.HTTP_400_BAD_REQUEST)
-    
 
+
+logger = logging.getLogger(__name__)
 class VerifyEmail(APIView):
+
     def post(self, request):
         otp_to_verify = request.data.get('otp')
         email = request.data.get('email')
+        if not otp_to_verify or not email:
+            return Response({
+                'error': 'OTP and email are required.'
+            }, status=status.HTTP_400_BAD_REQUEST)
         try:
             user = User.objects.get(email=email)
-            otp_valid_duration = 15  
-
+            otp_valid_duration = 15
             if user.otp == otp_to_verify and timezone.now() - user.otp_created_at <= timedelta(minutes=otp_valid_duration):
                 user.is_verified = True
                 user.save()
                 return Response({
                     'message': 'Email successfully verified'
                 }, status=status.HTTP_200_OK)
-
             else:
                 return Response({
                     'error': 'Invalid or expired OTP.'
                 }, status=status.HTTP_400_BAD_REQUEST)
-
         except User.DoesNotExist:
+            logger.error(f"User with email {email} does not exist.")
             return Response({
-                'error': 'User does not exist / OTP not provided'
+                'error': 'User does not exist.'
             }, status=status.HTTP_400_BAD_REQUEST)
 
 
