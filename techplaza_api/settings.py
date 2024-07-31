@@ -87,6 +87,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'techplaza_api.wsgi.application'
 
+CORS_ALLOW_ALL_ORIGINS = True
+
+CSRF_TRUSTED_ORIGINS = [
+    "http://127.0.0.1:3000",
+]
+
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
