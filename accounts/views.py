@@ -12,7 +12,7 @@ from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from datetime import timedelta
 import random
 import string
-from .serializers import RegisterSerializer, LoginSerializer, PasswordResetSerializer, NewPasswordSerializer, LogoutSerializer, UpdateAccountInfoSerializer, DashboardSerializer
+from .serializers import RegisterSerializer, LoginSerializer, PasswordResetSerializer, NewPasswordSerializer, UpdateAccountInfoSerializer, DashboardSerializer
 from .models import User
 import logging
 
@@ -117,16 +117,6 @@ class NewPasswordView(GenericAPIView):
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
         return Response({'message' : 'Your Password Reset Successfully'}, status=status.HTTP_200_OK)
-    
-class LogoutView(GenericAPIView):
-    serializer_class = LogoutSerializer
-    permission_classes = [IsAuthenticated]
-
-    def post(self, request):
-        serializer = self.serializer_class(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(status=status.HTTP_204_NO_CONTENT)
     
 class UpdateInformationView(APIView):
     permission_classes = [IsAuthenticated]
