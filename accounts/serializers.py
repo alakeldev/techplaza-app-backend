@@ -135,7 +135,7 @@ class NewPasswordSerializer(serializers.Serializer):
         
 
 class LogoutSerializer(serializers.Serializer):
-    refersh_token = serializers.CharField()
+    refresh_token = serializers.CharField()
     
     default_error_messages = {
         'bad_token':('Token expired')
