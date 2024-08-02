@@ -151,3 +151,15 @@ class LogoutSerializer(serializers.Serializer):
             token.blacklist()
         except TokenError:
             return self.fail('bad_token')
+        
+
+class UpdateAccountInfoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['full_name', 'email']
+
+    def validate_email(self, value):
+        if User.objects.filter(email=value).exists():
+            raise serializers.ValidationError("This email is already in use.")
+        else:
+            return value
