@@ -4,7 +4,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from rest_framework.exceptions import AuthenticationFailed
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.utils.encoding import smart_str, smart_bytes, force_str
+from django.utils.encoding import smart_bytes, force_str
 from django.urls import reverse
 from django.core.mail import EmailMessage
 from django.conf import settings
@@ -163,3 +163,8 @@ class UpdateAccountInfoSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("This email is already in use.")
         else:
             return value
+        
+class DashboardSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'full_name', 'email', 'date_joined', 'last_login']
