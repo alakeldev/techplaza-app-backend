@@ -31,7 +31,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG")
 
-ALLOWED_HOSTS = ["127.0.0.1:8000", "127.0.0.1",]
+ALLOWED_HOSTS = ["127.0.0.1:8000", "127.0.0.1", "backend-techplaza-1b0c24eaa252.herokuapp.com"]
 
 RENDER_EXTERNAL_HOSTNAME = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
 if RENDER_EXTERNAL_HOSTNAME:
