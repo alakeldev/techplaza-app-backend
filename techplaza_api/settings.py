@@ -91,6 +91,7 @@ CORS_ALLOW_ALL_ORIGINS = True
 
 CSRF_TRUSTED_ORIGINS = [
     "http://127.0.0.1:3000",
+    "https://frontend-techplaza-d0af91d53972.herokuapp.com/",
 ]
 
 
