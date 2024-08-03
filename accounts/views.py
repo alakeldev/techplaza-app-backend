@@ -158,4 +158,4 @@ class DashboardView(APIView):
     def get(self, request, *args, **kwargs):
         user = request.user
         serializer = DashboardSerializer(user)
-        return Response(serializer.data, status=200)
+        return Response(serializer.data, status=status.HTTP_200_OK)
