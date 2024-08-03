@@ -1,1 +1,1 @@
-web: gunicorn home_taste.wsgi
+web: gunicorn techplaza_api.wsgi
