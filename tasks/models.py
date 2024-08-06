@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 
-class task(models.Model):
+class Task(models.Model):
     task_title = models.CharField(max_length=100)
     task_description = models.CharField(max_length=250)
     is_done = models.BooleanField(default=False)
