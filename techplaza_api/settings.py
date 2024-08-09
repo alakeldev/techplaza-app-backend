@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'accounts',
     'weather',
     'tasks',
+    'snake',
 ]
 
 MIDDLEWARE = [
