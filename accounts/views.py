@@ -94,7 +94,7 @@ class PasswordResetView(GenericAPIView):
     def post(self, request):
         serializer = self.serializer_class(data=request.data, context={'request': request})
         serializer.is_valid(raise_exception=True)
-        return Response({'message':'A reset link sent to your email, check the spam email please'}, status=status.HTTP_200_OK)
+        return Response({'message': 'A reset link or registration invitation has been sent to your email. Check the spam folder if you do not see it.'}, status=status.HTTP_200_OK)
     
 
 class ConfirmPasswordResetView(GenericAPIView):

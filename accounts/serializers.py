@@ -72,33 +72,39 @@ class PasswordResetSerializer(serializers.Serializer):
         fields = ['email']
 
     def validate(self, attrs):
-
         email = attrs.get('email')
+        request = self.context.get('request')
+        site_domain = get_current_site(request).domain
+
         if User.objects.filter(email=email).exists():
             user = User.objects.get(email=email)
             uidb64 = urlsafe_base64_encode(smart_bytes(user.id))
             token = PasswordResetTokenGenerator().make_token(user)
-            request=self.context.get('request')
-            site_domain = get_current_site(request).domain
-            relative_link = reverse('confirm-password-reset', kwargs={'uidb64': uidb64, 'token' : token})
+            relative_link = reverse('confirm-password-reset', kwargs={'uidb64': uidb64, 'token': token})
             absolute_link = f"http://{site_domain}{relative_link}"
             data = {
-                'email_subject' : "Link to reset your password",
-                'email_text' : f"Hello, please use the link below to reset the password \n {absolute_link}",
+                'email_subject': "Link to reset your password",
+                'email_text': f"Hello, please use the link below to reset the password \n {absolute_link}",
                 'to': user.email
             }
+        else:
+            data = {
+                'email_subject': "Registration Invitation",
+                'email_text': f"Hello, it seems you are not registered on our website. Please register using the link below: \n http://127.0.0.1:3000/register",
+                'to': email
+            }
 
-            def send_email(data):
-                email = EmailMessage(
-                subject = data['email_subject'],
-                body = data['email_text'],
-                from_email = settings.EMAIL_HOST_USER,
-                to = [data['to']]
-                )
-                email.send()
-            
-            send_email(data)
+        self.send_email(data)
         return super().validate(attrs)
+
+    def send_email(self, data):
+        email = EmailMessage(
+            subject=data['email_subject'],
+            body=data['email_text'],
+            from_email=settings.EMAIL_HOST_USER,
+            to=[data['to']]
+        )
+        email.send()
 
 
 class NewPasswordSerializer(serializers.Serializer):
