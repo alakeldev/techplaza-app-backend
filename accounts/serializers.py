@@ -80,8 +80,7 @@ class PasswordResetSerializer(serializers.Serializer):
             user = User.objects.get(email=email)
             uidb64 = urlsafe_base64_encode(smart_bytes(user.id))
             token = PasswordResetTokenGenerator().make_token(user)
-            relative_link = reverse('confirm-password-reset', kwargs={'uidb64': uidb64, 'token': token})
-            absolute_link = f"http://{site_domain}{relative_link}"
+            absolute_link = f"http://127.0.0.1:3000/password_reset_confirm/{uidb64}/{token}"
             data = {
                 'email_subject': "Link to reset your password",
                 'email_text': f"Hello, please use the link below to reset the password \n {absolute_link}",
