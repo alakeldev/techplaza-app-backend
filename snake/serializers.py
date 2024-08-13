@@ -8,7 +8,7 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ['email', 'full_name']
 
 class HighScoreSerializer(serializers.ModelSerializer):
-    user = UserSerializer()
+    user = UserSerializer(read_only=True)
 
     class Meta:
         model = HighScore
