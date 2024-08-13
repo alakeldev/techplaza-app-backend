@@ -11,7 +11,7 @@ class HighScoreViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        return HighScore.objects.filter(user=self.request.user)
+        return HighScore.objects.all()
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
