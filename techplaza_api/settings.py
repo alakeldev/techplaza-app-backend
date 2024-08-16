@@ -55,7 +55,6 @@ INSTALLED_APPS = [
     'cloudinary_storage',
 
     'accounts',
-    'weather',
     'tasks',
     'cards',
     'snake',
