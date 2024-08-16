@@ -20,6 +20,7 @@ import logging
 
 class RegisterView(GenericAPIView):
     serializer_class = RegisterSerializer
+    permission_classes = [AllowAny]
 
     def post(self, request):
         user_data = request.data
@@ -55,6 +56,7 @@ class RegisterView(GenericAPIView):
 
 logger = logging.getLogger(__name__)
 class VerifyEmail(APIView):
+    permission_classes = [AllowAny]
 
     def post(self, request):
         otp_to_verify = request.data.get('otp')
@@ -85,6 +87,8 @@ class VerifyEmail(APIView):
 
 class LoginView(GenericAPIView):
     serializer_class = LoginSerializer
+    permission_classes = [AllowAny]
+
     def post(self, request):
         serializer = self.serializer_class(data=request.data, context={'request': request})
         serializer.is_valid(raise_exception=True)
@@ -93,6 +97,8 @@ class LoginView(GenericAPIView):
 
 class PasswordResetView(GenericAPIView):
     serializer_class = PasswordResetSerializer
+    permission_classes = [AllowAny]
+
     def post(self, request):
         serializer = self.serializer_class(data=request.data, context={'request': request})
         serializer.is_valid(raise_exception=True)
@@ -100,6 +106,8 @@ class PasswordResetView(GenericAPIView):
     
 
 class ConfirmPasswordResetView(GenericAPIView):
+    permission_classes = [AllowAny]
+
     def get(self,request, uidb64, token):
         try:
             user_id = smart_str(urlsafe_base64_decode(uidb64))
@@ -114,6 +122,7 @@ class ConfirmPasswordResetView(GenericAPIView):
 
 class NewPasswordView(GenericAPIView):
     serializer_class = NewPasswordSerializer
+    permission_classes = [AllowAny]
 
     def patch(self, request):
         serializer = self.serializer_class(data=request.data)
@@ -123,7 +132,7 @@ class NewPasswordView(GenericAPIView):
 
 class LogoutView(GenericAPIView):
     serializer_class = LogoutSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
 
     def post(self, request):
         serializer = self.serializer_class(data=request.data)
