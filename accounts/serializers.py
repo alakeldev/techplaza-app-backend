@@ -167,8 +167,3 @@ class UpdateAccountInfoSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("This email is already in use.")
         else:
             return value
-        
-class DashboardSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ['id', 'full_name', 'email', 'date_joined', 'last_login']

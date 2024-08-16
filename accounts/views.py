@@ -12,7 +12,7 @@ from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from datetime import timedelta
 import random
 import string
-from .serializers import RegisterSerializer, LoginSerializer, PasswordResetSerializer, NewPasswordSerializer, LogoutSerializer, UpdateAccountInfoSerializer, DashboardSerializer
+from .serializers import RegisterSerializer, LoginSerializer, PasswordResetSerializer, NewPasswordSerializer, LogoutSerializer, UpdateAccountInfoSerializer
 from .models import User
 import logging
 
@@ -161,12 +161,3 @@ class DeleteAccountView(APIView):
         user = request.user
         user.delete()
         return Response({"message": "Account deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
-        
-
-class DashboardView(APIView):
-    permission_classes = [IsAuthenticated]
-
-    def get(self, request, *args, **kwargs):
-        user = request.user
-        serializer = DashboardSerializer(user)
-        return Response(serializer.data, status=status.HTTP_200_OK)
