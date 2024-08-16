@@ -89,7 +89,7 @@ class PasswordResetSerializer(serializers.Serializer):
         else:
             data = {
                 'email_subject': "Registration Invitation",
-                'email_text': f"Hello, it seems you are not registered on our website. Please register using the link below: \n http://127.0.0.1:3000/register",
+                'email_text': f"Hello, it seems you are not registered on our website. Please register using the link below: \n https://frontend-techplaza-d0af91d53972.herokuapp.com/register",
                 'to': email
             }
 
