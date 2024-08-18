@@ -28,4 +28,4 @@ class TaskView(viewsets.ModelViewSet):
             serializer.save(user=self.request.user)
         except Exception as e:
             logger.error(f"Error creating task: {e}")
-            return Response({"error": "Error creating task"},
+            return Response({"error": "Error creating task"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
