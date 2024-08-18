@@ -29,3 +29,19 @@ class TaskView(viewsets.ModelViewSet):
         except Exception as e:
             logger.error(f"Error creating task: {e}")
             return Response({"error": "Error creating task"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    def perform_update(self, serializer):
+        try:
+            logger.debug(f"Updating task for user: {self.request.user}")
+            serializer.save(user=self.request.user)
+        except Exception as e:
+            logger.error(f"Error updating task: {e}")
+            return Response({"error": "Error updating task"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    def perform_destroy(self, instance):
+        try:
+            logger.debug(f"Deleting task for user: {self.request.user}")
+            instance.delete()
+        except Exception as e:
+            logger.error(f"Error deleting task: {e}")
+            return Response({"error": "Error deleting task"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
