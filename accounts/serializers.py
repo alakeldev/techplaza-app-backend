@@ -5,53 +5,73 @@ from rest_framework.exceptions import AuthenticationFailed
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import smart_bytes, force_str
-from django.urls import reverse
 from django.core.mail import EmailMessage
 from django.conf import settings
 from rest_framework_simplejwt.tokens import RefreshToken, TokenError
 from .models import User
 
+
 class RegisterSerializer(serializers.ModelSerializer):
-    password1=serializers.CharField(max_length=40, min_length=4, write_only=True)
-    password2=serializers.CharField(max_length=40, min_length=4, write_only=True)
+    """
+    Serializer for user registration.
+    Validates that the two password fields match.
+    Create a new user with the provided data.
+    """
+
+    password1 = serializers.CharField(
+        max_length=40, min_length=4, write_only=True
+    )
+    password2 = serializers.CharField(
+        max_length=40, min_length=4, write_only=True
+    )
 
     class Meta:
-        model=User
-        fields=['full_name', 'email', 'password1', 'password2']
+        model = User
+        fields = ["full_name", "email", "password1", "password2"]
 
     def validate(self, attrs):
-        password1 = attrs.get('password1', '')
-        password2 = attrs.get('password2', '')
+        password1 = attrs.get("password1", "")
+        password2 = attrs.get("password2", "")
         if password1 != password2:
-            raise serializers.ValidationError("The password fields didn't match")
+            raise serializers.ValidationError(
+                "The password fields didn't match"
+            )
         else:
             return attrs
-    
 
     def create(self, validated_data):
-        user=User.objects.create_user(
-            full_name=validated_data.get('full_name'),
-            email=validated_data.get('email'),
-            password=validated_data.get('password1'),
+        user = User.objects.create_user(
+            full_name=validated_data.get("full_name"),
+            email=validated_data.get("email"),
+            password=validated_data.get("password1"),
         )
         return user
 
 
 class LoginSerializer(serializers.ModelSerializer):
-    email=serializers.EmailField(max_length=255, min_length=10)
-    password=serializers.CharField(max_length=40, min_length=4, write_only=True)
-    full_name=serializers.CharField(max_length=100, read_only=True)
-    token=serializers.CharField(max_length=255, read_only=True)
-    refresh_token=serializers.CharField(max_length=255, read_only=True)
+    """
+    Serializer for user login.
+    Authenticates the user
+    ensure the email is verified
+    returns tokens.
+    """
+
+    email = serializers.EmailField(max_length=255, min_length=10)
+    password = serializers.CharField(
+        max_length=40, min_length=4, write_only=True
+    )
+    full_name = serializers.CharField(max_length=100, read_only=True)
+    token = serializers.CharField(max_length=255, read_only=True)
+    refresh_token = serializers.CharField(max_length=255, read_only=True)
 
     class Meta:
-        model=User
-        fields=['email', 'password', 'full_name', 'token', 'refresh_token']
+        model = User
+        fields = ["email", "password", "full_name", "token", "refresh_token"]
 
     def validate(self, attrs):
-        email = attrs.get('email')
-        password = attrs.get('password')
-        request = self.context.get('request')
+        email = attrs.get("email")
+        password = attrs.get("password")
+        request = self.context.get("request")
         user = authenticate(request, email=email, password=password)
         if not user:
             raise AuthenticationFailed("Sorry the cerdentials are invalid")
@@ -59,21 +79,27 @@ class LoginSerializer(serializers.ModelSerializer):
             raise AuthenticationFailed("User's Email isn't verified")
         user_token = user.user_tokens()
         return {
-                'full_name': user.user_full_name,
-                'email': user.email,
-                'token':str(user_token.get('token')),
-                'refresh_token': str(user_token.get('refresh')),
-            }
+            "full_name": user.user_full_name,
+            "email": user.email,
+            "token": str(user_token.get("token")),
+            "refresh_token": str(user_token.get("refresh")),
+        }
+
 
 class PasswordResetSerializer(serializers.Serializer):
+    """
+    - Serializer for requesting a password reset.
+    - Sends an email with the reset link.
+    """
+
     email = serializers.EmailField(max_length=255)
 
     class Meta:
-        fields = ['email']
+        fields = ["email"]
 
     def validate(self, attrs):
-        email = attrs.get('email')
-        request = self.context.get('request')
+        email = attrs.get("email")
+        request = self.context.get("request")
         site_domain = get_current_site(request).domain
 
         if User.objects.filter(email=email).exists():
@@ -82,33 +108,41 @@ class PasswordResetSerializer(serializers.Serializer):
             token = PasswordResetTokenGenerator().make_token(user)
             absolute_link = f"https://frontend-techplaza-d0af91d53972.herokuapp.com/password_reset_confirm/{uidb64}/{token}"
             data = {
-                'email_subject': "Link to reset your password",
-                'email_text': f"Hello, please use the link below to reset the password \n {absolute_link}",
-                'to': user.email
+                "email_subject": "Link to reset your password",
+                "email_text": f"Hello, please use the link below to reset the password \n {absolute_link}",
+                "to": user.email,
             }
         else:
             data = {
-                'email_subject': "Registration Invitation",
-                'email_text': f"Hello, it seems you are not registered on our website. Please register using the link below: \n https://frontend-techplaza-d0af91d53972.herokuapp.com/register",
-                'to': email
+                "email_subject": "Registration Invitation",
+                "email_text": f"Hello, it seems you are not registered on our website. Please register using the link below: \n https://frontend-techplaza-d0af91d53972.herokuapp.com/register",
+                "to": email,
             }
-
         self.send_email(data)
         return super().validate(attrs)
 
     def send_email(self, data):
         email = EmailMessage(
-            subject=data['email_subject'],
-            body=data['email_text'],
+            subject=data["email_subject"],
+            body=data["email_text"],
             from_email=settings.EMAIL_HOST_USER,
-            to=[data['to']]
+            to=[data["to"]],
         )
         email.send()
 
 
 class NewPasswordSerializer(serializers.Serializer):
-    password = serializers.CharField(max_length=40, min_length=4, write_only=True)
-    password_confirm = serializers.CharField(max_length=40, min_length=4, write_only=True)
+    """
+    Serializer for setting a new password.
+    Validates the token and ensures the passwords match.
+    """
+
+    password = serializers.CharField(
+        max_length=40, min_length=4, write_only=True
+    )
+    password_confirm = serializers.CharField(
+        max_length=40, min_length=4, write_only=True
+    )
     uidb64 = serializers.CharField(write_only=True)
     token = serializers.CharField(write_only=True)
 
@@ -116,38 +150,37 @@ class NewPasswordSerializer(serializers.Serializer):
         fields = ["password", "password_confirm", "uidb64", "token"]
 
     def validate(self, attrs):
-
         try:
-            token = attrs.get('token')
-            uidb64 = attrs.get('uidb64')
-            password = attrs.get('password')
-            password_confirm = attrs.get('password_confirm')
+            token = attrs.get("token")
+            uidb64 = attrs.get("uidb64")
+            password = attrs.get("password")
+            password_confirm = attrs.get("password_confirm")
 
             user_id = force_str(urlsafe_base64_decode(uidb64))
             user = User.objects.get(id=user_id)
             if not PasswordResetTokenGenerator().check_token(user, token):
                 raise AuthenticationFailed("The link is invalid", 401)
-
             if password != password_confirm:
                 raise AuthenticationFailed("Password Fields didn't match!")
-            
             user.set_password(password)
             user.save()
             return user
-        
         except:
             return AuthenticationFailed("The link is invalid/expired")
-        
+
 
 class LogoutSerializer(serializers.Serializer):
-    refresh_token = serializers.CharField()
+    """
+    Serializer for logging out a user.
+    Validate the refresh token.
+    Blacklists the refresh token.
+    """
 
-    default_error_messages = {
-        'bad_token':('Token expired')
-    }
+    refresh_token = serializers.CharField()
+    default_error_messages = {"bad_token": ("Token expired")}
 
     def validate(self, attrs):
-        self.token = attrs.get('refresh_token')
+        self.token = attrs.get("refresh_token")
         return attrs
 
     def save(self, **kwargs):
@@ -155,12 +188,18 @@ class LogoutSerializer(serializers.Serializer):
             token = RefreshToken(self.token)
             token.blacklist()
         except TokenError:
-            return self.fail('bad_token')
+            return self.fail("bad_token")
+
 
 class UpdateAccountInfoSerializer(serializers.ModelSerializer):
+    """
+    Serializer for updating account information.
+    Validates that the email is unique.
+    """
+
     class Meta:
         model = User
-        fields = ['full_name', 'email']
+        fields = ["full_name", "email"]
 
     def validate_email(self, value):
         if User.objects.filter(email=value).exists():

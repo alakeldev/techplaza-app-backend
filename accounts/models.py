@@ -4,7 +4,14 @@ from django.utils.translation import gettext_lazy as _
 from rest_framework_simplejwt.tokens import RefreshToken
 from .managers import UserManager
 
+
 class User(AbstractBaseUser, PermissionsMixin):
+    """
+    Custom user model that extends AbstractBaseUser and PermissionsMixin.
+    Includes fields for full name, email, verification status, and other user attributes.
+    Uses email as the unique identifier for authentication.
+    """
+
     full_name = models.CharField(_("Full Name"), max_length=100)
     email = models.EmailField(_("Email Address"), max_length=255, unique=True)
     is_superuser = models.BooleanField(default=False)
@@ -17,8 +24,10 @@ class User(AbstractBaseUser, PermissionsMixin):
     otp_created_at = models.DateTimeField(null=True, blank=True)
 
     USERNAME_FIELD = "email"
-    
-    REQUIRED_FIELDS = ["full_name",]
+
+    REQUIRED_FIELDS = [
+        "full_name",
+    ]
 
     objects = UserManager()
 
@@ -29,8 +38,11 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.full_name
 
     def user_tokens(self):
-        refresh=RefreshToken.for_user(self)
+        """
+        Generates and returns JWT tokens for the user.
+        """
+        refresh = RefreshToken.for_user(self)
         return {
-            'refresh': str(refresh),
-            'token': str(refresh.access_token),
+            "refresh": str(refresh),
+            "token": str(refresh.access_token),
         }
