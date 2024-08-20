@@ -1,9 +1,12 @@
 from django.db import models
-from accounts.models import User 
+from accounts.models import User
 
-# Create your models here.
 
 class Card(models.Model):
+    """
+    Model representing a user's card with contact and professional information.
+    """
+
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     phone_number = models.CharField(max_length=20)
     profession = models.CharField(max_length=50)
