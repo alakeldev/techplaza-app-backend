@@ -34,6 +34,8 @@ WEATHER_API_KEY = os.environ.get("WEATHER_API_KEY")
 
 DEBUG = os.environ.get("DEBUG")
 
+X_FRAME_OPTIONS = "SAMEORIGIN"
+
 ALLOWED_HOSTS = [
     "127.0.0.1:8000",
     "127.0.0.1",
