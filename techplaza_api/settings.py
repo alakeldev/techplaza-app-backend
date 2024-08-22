@@ -37,10 +37,7 @@ DEBUG = os.environ.get("DEBUG")
 X_FRAME_OPTIONS = "SAMEORIGIN"
 
 ALLOWED_HOSTS = [
-    "127.0.0.1:8000",
-    "127.0.0.1",
     "backend-techplaza-1b0c24eaa252.herokuapp.com",
-    "frontend-techplaza-d0af91d53972.herokuapp.com",
 ]
 
 RENDER_EXTERNAL_HOSTNAME = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
@@ -67,10 +64,10 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
-    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -100,10 +97,13 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "techplaza_api.wsgi.application"
 
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_ALLOWED_ORIGINS = [
+    "https://frontend-techplaza-d0af91d53972.herokuapp.com",
+]
 
 CSRF_TRUSTED_ORIGINS = [
-    "http://127.0.0.1:3000",
     "https://frontend-techplaza-d0af91d53972.herokuapp.com",
 ]
 
