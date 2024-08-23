@@ -124,7 +124,7 @@ The Techplaza platform project has been tested rigorously throughout the develop
 | Accounts | ✅ | ✅ | ✅ | ✅ |
 | Cards | ✅ | ✅ | ✅ | ✅ |
 | Tasks | ✅ | ✅ | ✅ | ✅ |
-| Snake | ✅ | ✅ | ✅ | --- |
+| Snake | ✅ | ✅ | --- | --- |
 
 #### **Testing URLs**
 
