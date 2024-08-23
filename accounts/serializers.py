@@ -109,13 +109,16 @@ class PasswordResetSerializer(serializers.Serializer):
             absolute_link = f"https://frontend-techplaza-d0af91d53972.herokuapp.com/password_reset_confirm/{uidb64}/{token}"
             data = {
                 "email_subject": "Link to reset your password",
-                "email_text": f"Hello, please use the link below to reset the password \n {absolute_link}",
+                "email_text": f"Hello, please use the link below to reset
+                the password \n {absolute_link}",
                 "to": user.email,
             }
         else:
             data = {
                 "email_subject": "Registration Invitation",
-                "email_text": f"Hello, it seems you are not registered on our website. Please register using the link below: \n https://frontend-techplaza-d0af91d53972.herokuapp.com/register",
+                "email_text": f"Hello, it seems you are not registered on
+                our website. Please register using the link below:
+                \n https://frontend-techplaza-d0af91d53972.herokuapp.com/register",
                 "to": email,
             }
         self.send_email(data)
@@ -165,7 +168,7 @@ class NewPasswordSerializer(serializers.Serializer):
             user.set_password(password)
             user.save()
             return user
-        except:
+        except Exception:
             return AuthenticationFailed("The link is invalid/expired")
 
 

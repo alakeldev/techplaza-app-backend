@@ -9,8 +9,10 @@ class UserManager(BaseUserManager):
     - Custom manager for the User model.
         Provides methods to create regular users and superusers.
     - Validates the provided email address.
-    - Creates and returns a regular user with the given email, full name, and password.
-    - Creates and returns a superuser with the given email, full name, and password.
+    - Creates and returns a regular user with the given
+    email, full name, password.
+    - Creates and returns a superuser with the given email,
+    full name, and password.
         Ensures that the superuser has the necessary permissions.
     """
 

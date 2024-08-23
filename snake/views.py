@@ -26,7 +26,7 @@ class HighScoreViewSet(viewsets.ModelViewSet):
         if not request.user.is_authenticated:
             return Response(
                 {
-                    "error": "Unauthorized access. Please provide valid credentials."
+                    "error": "Unauthorized. Please provide valid credentials."
                 },
                 status=status.HTTP_401_UNAUTHORIZED,
             )

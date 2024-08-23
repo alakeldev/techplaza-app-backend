@@ -8,7 +8,8 @@ from .managers import UserManager
 class User(AbstractBaseUser, PermissionsMixin):
     """
     Custom user model that extends AbstractBaseUser and PermissionsMixin.
-    Includes fields for full name, email, verification status, and other user attributes.
+    Includes fields for full name, email, verification status,
+    and other user attributes.
     Uses email as the unique identifier for authentication.
     """
 
