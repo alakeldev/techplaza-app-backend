@@ -126,7 +126,7 @@ The Techplaza platform project has been tested rigorously throughout the develop
 | Tasks | ✅ | ✅ | ✅ | ✅ |
 | Snake | ✅ | ✅ | --- | --- |
 
-#### **Testing URLs**
+#### **Testing URLs and Responses**
 
 | **URL** | **Passed** |
 | --- | --- |
