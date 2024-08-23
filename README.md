@@ -98,11 +98,11 @@ The Techplaza platform project has been tested rigorously throughout the develop
 | accounts app - serializers.py | [PEP8 - CI](https://pep8ci.herokuapp.com/)  | No issues found | [E501 line too long (128 > 79 characters - Frontend App path/link)](static/readme/accounts_serializers.png) |
 | accounts app - urls.py | [PEP8 - CI](https://pep8ci.herokuapp.com/) | [No issues found](static/readme/accounts_urls.png) | ✅ |
 | accounts app - views.py | [PEP8 - CI](https://pep8ci.herokuapp.com/) | [No issues found](static/readme/accounts_views.png) | ✅ |
-| snake game/app - admin.py | [PEP8 - CI](https://pep8ci.herokuapp.com/) | [No issues found](static/readme/snake_admin.png) | ✅ |
-| snake game/app - models.py | [PEP8 - CI](https://pep8ci.herokuapp.com/) | [No issues found](static/readme/snake_models.png) | ✅ |
-| snake game/app - serializers.py | [PEP8 - CI](https://pep8ci.herokuapp.com/) | [No issues found](static/readme/snake_serializers.png) | ✅ |
-| snake game/app - urls.py | [PEP8 - CI](https://pep8ci.herokuapp.com/) | [No issues found](static/readme/snake_urls.png) | ✅ |
-| snake game/app - views.py | [PEP8 - CI](https://pep8ci.herokuapp.com/) | [No issues found](static/readme/snake_views.png) | ✅ |
+| snake game app - admin.py | [PEP8 - CI](https://pep8ci.herokuapp.com/) | [No issues found](static/readme/snake_admin.png) | ✅ |
+| snake game app - models.py | [PEP8 - CI](https://pep8ci.herokuapp.com/) | [No issues found](static/readme/snake_models.png) | ✅ |
+| snake game app - serializers.py | [PEP8 - CI](https://pep8ci.herokuapp.com/) | [No issues found](static/readme/snake_serializers.png) | ✅ |
+| snake game app - urls.py | [PEP8 - CI](https://pep8ci.herokuapp.com/) | [No issues found](static/readme/snake_urls.png) | ✅ |
+| snake game app - views.py | [PEP8 - CI](https://pep8ci.herokuapp.com/) | [No issues found](static/readme/snake_views.png) | ✅ |
 | cards app - admin.py | [PEP8 - CI](https://pep8ci.herokuapp.com/) | [No issues found](static/readme/cards_admin.png) | ✅ |
 | cards app - models.py | [PEP8 - CI](https://pep8ci.herokuapp.com/) | [No issues found](static/readme/cards_models.png) | ✅ |
 | cards app - serializers.py | [PEP8 - CI](https://pep8ci.herokuapp.com/) | [No issues found](static/readme/cards_serializers.png) | ✅ |
