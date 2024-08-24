@@ -377,16 +377,23 @@ if RENDER_EXTERNAL_HOSTNAME:
 
 I would like to credit the various sources that were used throughout the Techplaza project development.
 
+* [Code-Institute-Curriculum](https://codeinstitute.net/de/) - Full Stack Software Development Curriculum.
+* [Django REST API Tutorial](https://www.youtube.com/watch?v=t-uAgI-AUxc&t=1493s) - was a good source at the start of my project.
+* [Rest Framework | Serializers & CRUD Tutprial](https://www.youtube.com/watch?v=TmsD8QExZ84) - was a good source at the start of my project to understand more about serializers.
+* [Django Rest Framework](https://www.django-rest-framework.org/) - Was my main source if I stuck in DRF.
+* [DRF-CheatSheet](https://djangocentral.com/django-rest-framework-cheat-sheet/) - DRF Cheat sheet was a very good and fast source for me.
+* [Stackoverflow](https://stackoverflow.com/) - Was used to check and read about any bug and error faced me during my project.
+* [W3Schools-PostgresSQL](https://www.w3schools.com/postgresql/postgresql_create_table.php) - Was my main source to learn SQL statments.
+* [Python-Doc](https://docs.python.org/3/tutorial/index.html) - Was a very help source of information.
+* [W3Schools-Python](https://www.w3schools.com/python/default.asp) - Was a very help source of information.
+* [Udemy-Python-Django](https://www.udemy.com/certificate/UC-aefd5c77-88d7-4a4e-a6f6-d9390bad39ab/) - In April 2022, I attended the Python Mega Course, which helped me to smoothly understand basic Python concepts. Additionally, I was able to learn some advanced material such as Django & Flask.
+  
 ## Content
 
 * The [Code Institute](https://codeinstitute.net/) and its [Moments Walkthrough project](https://moments-ci-react.herokuapp.com/) in Advanced Front-end specialization Django REST Framework guide served as the foundation for conceptualizing this API. The primary inspiration was drawn from the [Exercism Platform](https://exercism.org/).
 Inspired by the Exercism learning platform, I aim to develop a comprehensive platform that offers a diverse range of applications and services to registered users. This platform will encompass various functionalities, including work-related applications, event management, and chat services. Unlike Exercism, which leverages Discord for its chat functionality, I intend to integrate a dedicated chat application within my platform to enhance user experience and streamline communication.
 
 * The objective of this platform is to create a cohesive ecosystem where users can seamlessly access multiple services, applications, and engage in meaningful discussions. By providing an all-in-one solution, I aspire to foster a supportive and interactive community that encourages learning, growth, and innovation.
-
-* [Django REST API Tutorial](https://www.youtube.com/watch?v=t-uAgI-AUxc&t=1493s)
-
-* [Rest Framework | Serializers & CRUD Tutprial](https://www.youtube.com/watch?v=TmsD8QExZ84)
 
 # Acknowledgements
 
