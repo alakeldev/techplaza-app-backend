@@ -378,8 +378,8 @@ if RENDER_EXTERNAL_HOSTNAME:
 I would like to credit the various sources that were used throughout the Techplaza project development.
 
 * [Code-Institute-Curriculum](https://codeinstitute.net/de/) - Full Stack Software Development Curriculum.
-* [Django REST API Tutorial](https://www.youtube.com/watch?v=t-uAgI-AUxc&t=1493s) - was a good source at the start of my project.
-* [Rest Framework | Serializers & CRUD Tutprial](https://www.youtube.com/watch?v=TmsD8QExZ84) - was a good source at the start of my project to understand more about serializers.
+* [Django REST API Tutorial](https://www.youtube.com/watch?v=t-uAgI-AUxc&t=1493s) - Was a good source at the start of my project.
+* [Rest Framework | Serializers & CRUD Tutorial](https://www.youtube.com/watch?v=TmsD8QExZ84) - Was a good source at the start of my project to understand more about serializers.
 * [Django Rest Framework](https://www.django-rest-framework.org/) - Was my main source if I stuck in DRF.
 * [DRF-CheatSheet](https://djangocentral.com/django-rest-framework-cheat-sheet/) - DRF Cheat sheet was a very good and fast source for me.
 * [Stackoverflow](https://stackoverflow.com/) - Was used to check and read about any bug and error faced me during my project.
