@@ -151,6 +151,8 @@ The Techplaza platform project has been tested rigorously throughout the develop
 
 * ![Bug 5](static/readme/bug5.png)
 
+* ![Bug 6](static/readme/bug6.png)
+
 Additional faced bugs:
 
 * When connecting the deployed front end of the application to the back end, an intermittent issue arose where the front-end requests were being rejected by the back-end server due to a CORS header error. The API was declining the front-end HTTP requests because the necessary CORS headers were missing in the response. The error message indicated that access to the requested resource was blocked by the CORS policy, stating: Access to XMLHttpRequest at '[backend URL]' from origin '[frontend URL]' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
