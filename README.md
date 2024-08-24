@@ -181,6 +181,8 @@ Here you will find a complete list of all the technologies used to help create a
 * [VScode](https://code.visualstudio.com/) - VScode is the IDE that used to write the code and push it to the repo.
 * [Heroku](https://dashboard.heroku.com/) - Heroku is a platform as a service (PaaS) that enables developers to build, run, and operate applications entirely in the cloud.
 * [Elephant SQL](https://www.elephantsql.com/) - Online configured and optimized PostgreSQL databases.
+* [Microsoft Outlook - SMTP settings](https://support.microsoft.com/en-us/office/pop-imap-and-smtp-settings-for-outlook-com-d088b986-291d-42b8-9564-9c414e2aa040): was used to send email to user (scenario: forgot password).
+* [JWT IO](https://jwt.io/) - JSON Web Tokens was used to securely transmit information between parties (scenario: user authentication), The site provides tools to decode, verify, and generate JWTs, making it easier to work with these tokens(access, refresh).
 
 ## Libraries and Imports
 
@@ -226,6 +228,7 @@ Here you will find a complete list of all the technologies used to help create a
 - string - Provides functionality for string operations
 - pathlib.Path - Provides functionality for handling file system paths
 - os - Provides functionality for interacting with the operating system
+- Microsoft_Outlook_SMTP - was used to send email to user (scenario: forgot password)
 
 # Deployment
 
