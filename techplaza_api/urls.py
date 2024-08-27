@@ -20,10 +20,10 @@ from django.urls import path, include
 from .views import welcome_view
 
 urlpatterns = [
-    path("/admin/", admin.site.urls),
+    path("admin/", admin.site.urls),
+    path("api/auth/", include("accounts.urls")),
+    path("api/app2/", include("tasks.urls")),
+    path("api/app3/", include("cards.urls")),
+    path("api/game1/", include("snake.urls")),
     path('', welcome_view, name='welcome'),
-    path("/api/auth/", include("accounts.urls")),
-    path("/api/app2/", include("tasks.urls")),
-    path("/api/app3/", include("cards.urls")),
-    path("/api/game1/", include("snake.urls")),
 ]
