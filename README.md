@@ -2,7 +2,7 @@
 
 **TECHPLAZA-API** The robust backend infrastructure is meticulously crafted to support the diverse functionalities of the Techplaza platform. Powered by the Django Rest Framework (DRF), the backend ensures seamless integration with the ReactJS frontend. Users can register, log in, and access various applications, including weather updates, task management, community Cards, games, and more.
 
-![API view across devices](static/readme/api.png)
+![API view](static/readme/api.png)
 
 * This section of the project comprises the backend API database, designed to support the React.js frontend, and is powered by the Django Rest Framework.
 
