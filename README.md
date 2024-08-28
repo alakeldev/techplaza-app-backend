@@ -22,6 +22,7 @@
   * [**Validator Tests**](<#validator-tests>)
   * [**Manual Tests**](<#manual-tests>)
   * [**Fixed Bugs**](<#fixed-bugs>)
+  * [**Unfixed Bugs**](<#unfixed-bugs>)
 * [**Technologies Used**](<#technologies-used>)
   * [**Languages**](<#languages>)
   * [**Frameworks**](<#frameworks>)
