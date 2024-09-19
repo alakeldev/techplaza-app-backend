@@ -106,7 +106,8 @@ class PasswordResetSerializer(serializers.Serializer):
             user = User.objects.get(email=email)
             uidb64 = urlsafe_base64_encode(smart_bytes(user.id))
             token = PasswordResetTokenGenerator().make_token(user)
-            absolute_link = f"https://frontend-techplaza-d0af91d53972.herokuapp.com/password_reset_confirm/{uidb64}/{token}"
+            absolute_link = f"""https://frontend-techplaza-d0af91d53972.
+            herokuapp.com/password_reset_confirm/{uidb64}/{token}"""
             data = {
                 "email_subject": "Link to reset your password",
                 "email_text": f"""Hello, please use the link below to reset
@@ -116,9 +117,12 @@ class PasswordResetSerializer(serializers.Serializer):
         else:
             data = {
                 "email_subject": "Registration Invitation",
-                "email_text": f"""Hello, it seems you are not registered on
-                our website. Please register using the link below:
-                \n https://frontend-techplaza-d0af91d53972.herokuapp.com/register""",
+                "email_text": (
+                    "Hello, it seems you are not registered user."
+                    "Please register using the link below:\n"
+                    "https://frontend-techplaza-d0af91d53972."
+                    "herokuapp.com/register"
+                    ),
                 "to": email,
             }
         self.send_email(data)
