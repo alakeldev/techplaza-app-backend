@@ -96,7 +96,7 @@ The Techplaza platform project has been tested rigorously throughout the develop
 | accounts app - admin.py | [PEP8 - CI](https://pep8ci.herokuapp.com/) | [No issues found](static/readme/accounts_admin.png) | ✅ |
 | accounts app - managers.py | [PEP8 - CI](https://pep8ci.herokuapp.com/) | [No issues found](static/readme/accounts_managers.png) | ✅ |
 | accounts app - models.py | [PEP8 - CI](https://pep8ci.herokuapp.com/) | [No issues found](static/images/readme/accounts_models.png) | ✅ |
-| accounts app - serializers.py | [PEP8 - CI](https://pep8ci.herokuapp.com/)  | No issues found | [E501 line too long (128 > 79 characters - Frontend App path/link)](static/readme/accounts_serializers.png) |
+| accounts app - serializers.py | [PEP8 - CI](https://pep8ci.herokuapp.com/)  | [No issues found](static/images/readme/accounts_serializers.png) | ✅ |
 | accounts app - urls.py | [PEP8 - CI](https://pep8ci.herokuapp.com/) | [No issues found](static/readme/accounts_urls.png) | ✅ |
 | accounts app - views.py | [PEP8 - CI](https://pep8ci.herokuapp.com/) | [No issues found](static/readme/accounts_views.png) | ✅ |
 | snake game app - admin.py | [PEP8 - CI](https://pep8ci.herokuapp.com/) | [No issues found](static/readme/snake_admin.png) | ✅ |

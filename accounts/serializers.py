@@ -112,8 +112,10 @@ class PasswordResetSerializer(serializers.Serializer):
             )
             data = {
                 "email_subject": "Link to reset your password",
-                "email_text": f"""Hello, please use the link below to reset
-                the password \n {absolute_link}""",
+                "email_text": (
+                    "Hello, please use the link below to reset the password"
+                    f"\n{absolute_link}"
+                ),
                 "to": user.email,
             }
         else:
