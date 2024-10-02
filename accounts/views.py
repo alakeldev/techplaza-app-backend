@@ -48,7 +48,7 @@ class RegisterView(GenericAPIView):
                 "Techplaza OTP for Registration Verification",
                 f"""Your OTP for registration verification is {otp}.\nPlease use this link: https://frontend-techplaza-d0af91d53972.herokuapp.com/otp/verify if you close your browser window. 
                 \nNote: Your email will be deleted from our database after 14 days if not verified.""",
-                "abodeaktech@hotmail.com",
+                "abdullah.alakel.svu@gmail.com",
                 [user.email],
                 fail_silently=False,
             )
