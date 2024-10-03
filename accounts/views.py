@@ -46,9 +46,16 @@ class RegisterView(GenericAPIView):
 
             send_mail(
                 "Techplaza OTP for Registration Verification",
-                f"""Your OTP for registration verification is {otp}.\nPlease use this link: https://frontend-techplaza-d0af91d53972.herokuapp.com/otp/verify if you close your browser window. 
-                \nNote: Your email will be deleted from our database after 14 days if not verified.""",
-                "techplazaplatform@gmail.com",
+                (
+                    f"Your OTP for registration verification is {otp}.\n"
+                    "Please use this link: "
+                    "https://frontend-techplaza-d0af91d53972."
+                    "herokuapp.com/otp/verify "
+                    "if you close your browser window.\n"
+                    "Note: Your email will be deleted "
+                    "from our database after 14 days "
+                    "if not verified."
+                ),
                 [user.email],
                 fail_silently=False,
             )
@@ -58,7 +65,7 @@ class RegisterView(GenericAPIView):
             return Response(
                 {
                     "data": user_data,
-                    "message": f"""Thanks for your Registration {user.full_name},
+                    "message": f"""Thanks for Registration {user.full_name},
                             a verified code has been sent to your Email.""",
                 },
                 status=status.HTTP_201_CREATED,
@@ -140,7 +147,11 @@ class PasswordResetView(GenericAPIView):
         serializer.is_valid(raise_exception=True)
         return Response(
             {
-                "message": "A reset link or registration invitation has been sent to your email. Check the spam folder if you do not see it."
+                "message": (
+                            "A reset link or registration invitation "
+                            "has been sent to your email."
+                            "Check the spam folder if you do not see it."
+                        )
             },
             status=status.HTTP_200_OK,
         )

@@ -71,6 +71,7 @@ Not all stories have been implemented. Some have been left for future implementa
   * As a registered user, I want to see the MVP and best score players in the community so that I can compete with others.
   * As a registered user accessing the platform on a small or medium screen, I want to be informed about why the game is not displaying and be provided with an option to navigate back to the dashboard.
   * As a registered user, I want to access the card community application from the dashboard so that I can create, display my card and view the other community members cards.
+  * As a registered user, I want to filter the cards by specific country so that I can find cards relevant to my residence country or specific country.
   * As a registered user, I want to create a card with my name, email, number, profession, description, and country so that I can share my information with the community.
   * As a registered user, I want to edit and delete my card so that I can update or remove my information.
 
@@ -184,7 +185,7 @@ Here you will find a complete list of all the technologies used to help create a
 * [VScode](https://code.visualstudio.com/) - VScode is the IDE that used to write the code and push it to the repo.
 * [Heroku](https://dashboard.heroku.com/) - Heroku is a platform as a service (PaaS) that enables developers to build, run, and operate applications entirely in the cloud.
 * [Elephant SQL](https://www.elephantsql.com/) - Online configured and optimized PostgreSQL databases.
-* [Microsoft Outlook - SMTP settings](https://support.microsoft.com/en-us/office/pop-imap-and-smtp-settings-for-outlook-com-d088b986-291d-42b8-9564-9c414e2aa040): was used to send email to user (scenario: forgot password).
+* [Gmail - SMTP settings](https://developers.google.com/gmail/imap/imap-smtp): Was used to send email to users (scenarios: registration(verify) & forgot password).
 * [JWT IO](https://jwt.io/) - JSON Web Tokens was used to securely transmit information between parties (scenario: user authentication), The site provides tools to decode, verify, and generate JWTs, making it easier to work with these tokens(access, refresh).
 
 ## Libraries and Imports
