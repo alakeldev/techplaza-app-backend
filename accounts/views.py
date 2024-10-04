@@ -56,6 +56,7 @@ class RegisterView(GenericAPIView):
                     "from our database after 14 days "
                     "if not verified."
                 ),
+                "techplazaplatform@gmail.com",
                 [user.email],
                 fail_silently=False,
             )
