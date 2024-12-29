@@ -391,6 +391,5 @@ I would like to credit the various sources that were used throughout the Techpla
 
 * The objective of this platform is to create a cohesive ecosystem where users can seamlessly access multiple services, applications, and engage in meaningful discussions. By providing an all-in-one solution, I aspire to foster a supportive and interactive community that encourages learning, growth, and innovation.
 
-Abdullah Alakel
 
 [Back to top](<#contents>)
