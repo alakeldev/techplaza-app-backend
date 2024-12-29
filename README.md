@@ -6,13 +6,11 @@
 
 * This section of the project comprises the backend API database, designed to support the React.js frontend, and is powered by the Django Rest Framework.
 
-* This project was developed as the culminating submission for my Advanced Frontend Portfolio, as part of the Diploma in Full Stack Software Development program at [Code Institute](https://codeinstitute.net/).
-
 #### - BACKEND LIVE LINK: [HEROKU - TECHPLAZA API](https://backend-techplaza-1b0c24eaa252.herokuapp.com/)
 
 #### - FRONTEND LIVE LINK: [HEROKU - TECHPLAZA SITE](https://frontend-techplaza-d0af91d53972.herokuapp.com/)
 
-#### - FRONTEND REPOSITORY: [GITHUB - FRONTEND REPO](https://github.com/alakeldev/frontend-techplaza-pp5)
+#### - FRONTEND REPOSITORY: [GITHUB - FRONTEND REPO](https://github.com/alakeldev/techplaza-app-frontend)
 
 # Contents
 
@@ -31,7 +29,6 @@
 * [**Deployment**](<#deployment>)
 * [**Credits**](<#credits>)
   * [**Content**](<#content>)
-* [**Acknowledgements**](<#acknowledgements>)
 
 # User Stories
 
@@ -75,7 +72,7 @@ Not all stories have been implemented. Some have been left for future implementa
   * As a registered user, I want to create a card with my name, email, number, profession, description, and country so that I can share my information with the community.
   * As a registered user, I want to edit and delete my card so that I can update or remove my information.
 
-The closed Techplaza platform GitHub issues can be found here - [Techplaza GitHub Closed Issues](https://github.com/alakeldev/frontend-techplaza-pp5/issues?q=is%3Aissue+is%3Aclosed)
+The closed Techplaza platform GitHub issues can be found here - [Techplaza GitHub Closed Issues](https://github.com/alakeldev/techplaza-app-frontend/issues?q=is%3Aissue+is%3Aclosed)
 
 The Techplaza Project Board can be found here - [Techplaza Project Board](https://github.com/users/alakeldev/projects/7)
 
@@ -267,10 +264,6 @@ Before continuing, please ensure you are signed up and logged into [Heroku](http
 8. Return to the dashboard and click on the database instance name
 9. Copy the ElephantSQL database URL using the copy icon. The URL starts with postgres://
 
-OR
-
-* Alternatively, you can utilize the URL database provided by Code Institute to their students throughout their learning journey.
-
 ### Connect the external database to Heroku
 
 1. Open the app in Heroku
@@ -384,7 +377,6 @@ if RENDER_EXTERNAL_HOSTNAME:
 
 I would like to credit the various sources that were used throughout the Techplaza project development.
 
-* [Code-Institute-Curriculum](https://codeinstitute.net/de/) - Full Stack Software Development Curriculum.
 * [Django REST API Tutorial](https://www.youtube.com/watch?v=t-uAgI-AUxc&t=1493s) - Was a good source at the start of my project.
 * [Rest Framework | Serializers & CRUD Tutorial](https://www.youtube.com/watch?v=TmsD8QExZ84) - Was a good source at the start of my project to understand more about serializers.
 * [Django Rest Framework](https://www.django-rest-framework.org/) - Was my main source if I stuck in DRF.
@@ -397,18 +389,7 @@ I would like to credit the various sources that were used throughout the Techpla
   
 ## Content
 
-* The [Code Institute](https://codeinstitute.net/) and its [Moments Walkthrough project](https://moments-ci-react.herokuapp.com/) in Advanced Front-end specialization Django REST Framework guide served as the foundation for conceptualizing this API. The primary inspiration was drawn from the [Exercism Platform](https://exercism.org/).
-Inspired by the Exercism learning platform, I aim to develop a comprehensive platform that offers a diverse range of applications and services to registered users. This platform will encompass various functionalities, including work-related applications, event management, and chat services. Unlike Exercism, which leverages Discord for its chat functionality, I intend to integrate a dedicated chat application within my platform to enhance user experience and streamline communication.
-
 * The objective of this platform is to create a cohesive ecosystem where users can seamlessly access multiple services, applications, and engage in meaningful discussions. By providing an all-in-one solution, I aspire to foster a supportive and interactive community that encourages learning, growth, and innovation.
-
-# Acknowledgements
-
-I would like to extend my heartfelt gratitude to the [Code Institute](https://codeinstitute.net/) for the learning material and their unwavering support throughout my learning journey.
-I am also deeply thankful to my mentor Martina for her invaluable guidance and advice.
-Additionally, I appreciate the CI Slack community for their encouragement and support during this challenging final project.
-
-Best wishes and happy coding!
 
 Abdullah Alakel
 
